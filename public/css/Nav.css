@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.icon-ionic{
+    rotate: 45deg;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .icon-ionic {
+      animation: App-logo-spin infinite 3s linear;
+    }
+  }
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+      color: #291fe4;
+    }
+    to {
+      transform: rotate(360deg);
+      color: #4f46e5;
+    }
+  }
+  .search-bar{
+      position: relative;
+  }
+  .search-bar input{
+      padding-left: 45px;
+  }
+  .search-bar ion-icon{
+    position: absolute;
+    left: 10px;
+    top: 28%;
+    color: white;
+  }
