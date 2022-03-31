@@ -4,40 +4,30 @@ import { AppSearch } from '../../context'
 
 
 const Login = () => {
-    const [username, setUsername] = useState("");
+    const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
-    
+    const [auth,setAuth] = useState(false);
+
     const rejects = /[^\w\s]/gi;
     const context = useContext(AppSearch);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const usernameHandler = (e) => {
-        setUsername(e.target.value)
-       if(username === (context.states.user.name)){
-           console.log("same")
-       }else{
-        console.log("no")
-       }
-        
-    }
-    const passwordHandler = (e) => {
+    const onChangePass = (e) => {
         setPassword(e.target.value)
-       if(username === (context.states.user.name)){
-           console.log("same")
-       }else{
-        console.log("no")
-       }
-        
-    }
-    
-    const isAuth = () => {
-        if((username === (context.states.user.name))&&(password === (context.states.user.password))){
-            console.log("sakto jud")
-            context.setStates({...context.states.user, auth: true})
+      }
+      const onChangeUser = (e) => {
+        setUserName(e.target.value)
+      }
+      const isAuth = () => {
+        if((userName === (context.states.user.name))&&(password === (context.states.user.password))){
+          console.log("sakto jud")
+          // context.setStates({...context.states.user, isAuth: true})
+          setAuth(true);
         }else{
-         console.log("no")
+          // if(!auth){
+            console.log("sayup jud")
+          // }
         }
-        
-    }
+      }
     return (
     <>
         <div className='flex items-center login-page py-20 my-auto h-screen pb-92'>
@@ -51,19 +41,16 @@ const Login = () => {
                 <input 
                     className='bg-gray-700/60 h-10 rounded text-white px-5 py-5 w-[300px]'
                     placeholder='Username or Email'
-                    value={username.replace(rejects,"")}
-                    onChange={(e) => {
-                        usernameHandler(e);
-                    }}
+                    value={userName.replace(rejects,"")}
+                    onChange={onChangeUser}
                     // value={loginCredentials}
                 />
                 <input 
                     className='bg-gray-700/50 h-10 rounded mt-5 text-white px-5 py-5 w-[300px]'
                     placeholder='Password'
                     value={password}
-                    onChange={(e) => {
-                        passwordHandler(e);
-                    }}
+                    onChange={onChangePass}
+                    type="password"
                 />
                 <div className='flex mt-5 items-center justify-between'>
                     <div>

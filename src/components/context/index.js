@@ -9,7 +9,6 @@ export const ContextProvider = (props) => {
         user:{
             name: 'JohnMagalso',
             password: 'admin',
-            auth: false
         }
     }
     const [states, setStates] = useState(initialValue)
