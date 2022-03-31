@@ -8,7 +8,7 @@ export const Title = () => {
   let movie = ListMovies[0];
   return (
     <div>
-      <div className='flex flex-col absolute top-20 left-10 xl:left-32 py-12'>
+      <div className='flex flex-col relative top-20 left-10 xl:left-32 py-12'>
         <Styledimg>
           <img 
             src={name}
@@ -47,6 +47,7 @@ export const Title = () => {
           </a>
         </div>
       </div>
+      
     </div>
   )
 }

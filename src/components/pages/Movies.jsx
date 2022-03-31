@@ -11,7 +11,7 @@ export default function Movies(){
     const [movies, setMovies] = useState(Latest); 
     const settings = {
         dots: false,
-        infinite: true,
+        infinite: false,
         slidesToShow: 5,
         slidesToScroll: 1,
         autoplay: true,

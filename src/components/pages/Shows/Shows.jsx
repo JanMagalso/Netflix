@@ -13,11 +13,11 @@ export default function Movies(){
     const settings = {
         dots: false,
         infinite: true,
-        slidesToShow: 5,
+        slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
-        speed: 500,
-        autoplaySpeed: 1500,
+        speed: 1000,
+        autoplaySpeed: 3000,
         cssEase: "linear",
     };
     useEffect(()=>{

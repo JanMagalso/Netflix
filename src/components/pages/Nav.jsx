@@ -59,14 +59,14 @@ const Nav = () => {
             </ul>
             </div>
             <div className='search-bar xl:flex'>
-            <div className=''>
+            <div className='hidden md:block'>
             <input
                 style={searchBar}
                 key="random1"
                 value={searchValue}
                 placeholder={"| Search Movie"}
                 onChange={(e)=> changeHandler(e)}
-                className="rounded-lg pl-11 w-0 xl:w-80"
+                className="rounded-lg pl-11 w-0 xl:w-80 hidden md:block"
             />
                 <ion-icon name="search-outline">
 
