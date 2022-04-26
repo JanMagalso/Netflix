@@ -13,6 +13,7 @@ const Landing = () => {
       setTimeout(()=>{
         setIsloading(false);
       },1000)
+      
   },[])
   
   return (
@@ -21,13 +22,13 @@ const Landing = () => {
      {    
        isLoading 
        ?
-       <div className='h-screen w-screen flex justify-center items-center overflow-y-auto'>
+       <div className='h-[100vh] w-[95vw] flex justify-center items-center overflow-y-auto'>
          <ClipLoader loading color="red;" size={50} className=' scale-in-center'/>
        </div>
        :
-       <StyledBg className='w-screen h-screen'>
-          <Title/>
-      </StyledBg>
+       <section>
+       <StyledBg className='w-full h-screen absolute'></StyledBg>
+        <Title/></section>
 
        
      }
@@ -40,5 +41,7 @@ export default Landing
 const StyledBg = Styled.div`
   background: url(${ListMovies[0].bg}) no-repeat;
   background-size: cover;
-  
+  @media (max-width: 768px) {
+    background-position-x: -500px;
+  }
 `

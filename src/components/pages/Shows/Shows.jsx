@@ -8,22 +8,60 @@ import { useNavigate } from "react-router";
 export default function Movies(){
     const context = useContext(AppSearch)
     const {searchValue} = context.states;
-    const [movies, setMovies] = useState(Latest);
-    const navigate = useNavigate();
+    const [movies, setMovies] = useState(Latest); 
     const settings = {
         dots: false,
-        infinite: true,
+        infinite: false,
         slidesToShow: 5,
         slidesToScroll: 1,
         autoplay: true,
-        speed: 1000,
-        autoplaySpeed: 3000,
+        speed: 500,
+        autoplaySpeed: 1500,
         cssEase: "linear",
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                initialSlide: 2
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]
     };
+    const [check, setCheck] = useState(settings);
+    const navigate = useNavigate()
+    
     useEffect(()=>{
-        const newList = [...Latest].filter(data => data.genre.toLowerCase().match('series')!== null)
+        // infiniteCheck();
+        searchValue==null?
+            setCheck({infinite:true})
+            :
+            setCheck({infinite:false})
+        
+        const newList = [...Latest].filter(data => data.title.toLowerCase().match(searchValue.toLowerCase())!== null)
         setMovies(newList);
+        console.log(searchValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[searchValue])
+
+       
     return(
         <StyleDiv className='py-20 px-14 bg-black h-screen overflow-x-auto mt-14'>
             <h2 className='mb-5 text-white text-2xl'>TV SHOWS<br/>

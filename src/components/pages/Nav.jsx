@@ -74,7 +74,7 @@ const Nav = () => {
             </div>
 
             </div>  
-            <div className={ active? `hamburger-container block xl:hidden change absolute`: `hamburger-container block xl:hidden absolute`}  onClick={ToggleClass}>
+            <div className={ active? `hamburger-container block xl:hidden change absolute`: `hamburger-container block xl:hidden absolute`}   onClick={ToggleClass}>
                 <div className="bar1"></div>
                 <div className="bar2"></div>
                 <div className="bar3"></div>

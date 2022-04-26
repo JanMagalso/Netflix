@@ -1,19 +1,80 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import name from './../../img/name.png'
 import Styled from 'styled-components'
 import ListMovies from '../../ Movies/ListMovies'
+import Slider from 'react-slick'
+import { useNavigate } from 'react-router'
+import { AppSearch } from './../../context';
+import {Latest} from './../../Movies.js'
+import {style} from './Style'
 // import {device} from './typescripts/devices'
 
 export const Title = () => {
+  const context = useContext(AppSearch)
+    const {searchValue} = context.states;
+    const [movies, setMovies] = useState(Latest); 
+    const settings = {
+        dots: false,
+        infinite: false,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        autoplay: true,
+        speed: 500,
+        autoplaySpeed: 1500,
+        cssEase: "linear",
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              initialSlide: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+    };
+    const [check, setCheck] = useState(settings);
+    const navigate = useNavigate()
+    
+    useEffect(()=>{
+        // infiniteCheck();
+        searchValue==null?
+            setCheck({infinite:true})
+            :
+            setCheck({infinite:false})
+        
+        const newList = [...Latest].filter(data => data.title.toLowerCase().match(searchValue.toLowerCase())!== null)
+        setMovies(newList);
+        console.log(searchValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[searchValue])
   let movie = ListMovies[0];
   return (
-    <div>
-      <div className='flex flex-col relative top-20 left-10 xl:left-32 py-12'>
+    <>
+      <div>
+      <Gradient></Gradient>
+      <div className='flex flex-col relative top-20 ml-10 xl:ml-32 py-12 h-screen'>
         <Styledimg>
           <img 
             src={name}
             alt=''
-            className='w-1/3 xl:w-1/5'
+            className={style.imgClass}
           />
           {/* <h1 className='text-6xl mb-5 text-white'>{movie.title}</h1> */}
         </Styledimg>
@@ -42,18 +103,61 @@ export const Title = () => {
             target='_blank'
             rel='noreferrer'
           >
-            <img src='./img/play.png' className='w-14' alt=''></img>
+            <img src='./img/play.png' className='w-14' alt=''/>
             <h2 className='flex  text-white my-auto ml-5 text-xl'>Watch Now</h2>
           </a>
         </div>
       </div>
       
     </div>
+    <StyleDiv className='py-20 px-14 bg-black h-screen overflow-x-auto'>
+            <h2 className='mb-5 text-white text-2xl z-50'>Continue Watching for John
+            </h2>
+             <div className=''>
+                <Slider {...settings}>
+                {
+                    movies.map((dataList,i) => {
+                    console.log(movies);
+                    return(
+                        <div onClick={() => {
+                            navigate(`/view/${dataList.id}`);
+                        }} 
+                        className='py-16' key={i}>
+                            <Image
+                                    src={dataList.img}
+                                    className='w-full h-full'
+                                    alt=''
+                                />
+                            <a href="/" onClick={() => {
+                                navigate(`/view/${dataList.id}`);
+                            }}
+                                className='' >
+                                    {/* <img src='./../img/play.png' alt=''/> */}
+                            </a>
+                                <h2 className='text-white z-50 relative top-0 mt-5 hidden'>{dataList.title}</h2>
+                        </div>
+                    )
+                })
+                }
+                </Slider>
+            </div>
+        </StyleDiv>
+    </>
   )
 }
 export default Title
+const Gradient = Styled.div`
+  background: linear-gradient(to right,black 0%,transparent 50%);
+  background-size: cover;
+  position: absolute;
+  height: 100vh;
+  width: 95vw;
+  @media (max-width: 768px) {
+    background: linear-gradient(to right,black 0%,transparent 100%);
+  }
+`
 const Styledimg = Styled.div`
-    top: 28%;
+    top: 0%;
     position: relative;
 `
 const StyleList = Styled.ul`
@@ -91,4 +195,40 @@ const StyleList = Styled.ul`
 
     }
     
+`
+const Image = Styled.img `
+    margin-top: 20px;
+    max-width: unset;
+    width: 350px;
+    height: 180px;
+    :hover{
+        transition: 0.5s;
+        transform: scale(1.5);
+        object-fit: contain;
+
+    }
+    @media (max-width: 768px){
+        :hover{
+            // transform: none;
+            transition: 0.5s;
+            overflow: scroll;
+            object-fit: contain;
+            transform: scale(1.2)
+        }
+    }
+`
+
+const StyleDiv = Styled.div`
+    .thumbnail .play:hover{
+        transition: 0.5s;
+        transform: scale(1.5);
+        object-fit: contain;
+    }
+    @media (max-width: 768px){
+        .thumbnail .play:hover{
+            // transform: none;
+            transition: 0.5s;
+            transform: scale(1.2)
+        }
+    }
 `

@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState ,useEffect } from 'react'
+import { useNavigate } from 'react-router';
 import { AppSearch } from '../../context'
 // import auth from './../../../auth'
 
@@ -7,6 +8,7 @@ const Login = () => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [auth,setAuth] = useState(false);
+    const navigate = useNavigate();
 
     const rejects = /[^\w\s]/gi;
     const context = useContext(AppSearch);
@@ -25,9 +27,15 @@ const Login = () => {
         }else{
           // if(!auth){
             console.log("sayup jud")
+            alert("Please enter valid username and password");
           // }
         }
       }
+      useEffect(() => {
+        if (auth) {
+          navigate('/home');
+        }
+      });
     return (
     <>
         <div className='flex items-center login-page py-20 my-auto h-screen pb-92'>
@@ -69,7 +77,7 @@ const Login = () => {
                 >
                     Sign In
                 </button>
-                <h1 className='text-white text-xl'>{}</h1>
+                
             </div>
         </div>
     </>

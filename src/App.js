@@ -12,7 +12,6 @@ import Shows from './components/pages/Shows/Shows'
 import View from './components/pages/View'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { getValue } from '@testing-library/user-event/dist/utils';
 import { useMemo, useState } from 'react';
 // import ProtectedRoute from './components/ProtectedRoute';
 // import { useState, useEffect } from 'react';
@@ -29,14 +28,13 @@ function App() {
       <Router>
         <Nav />
         <Routes>
-          <Route path='/login' element={<Login/>}></Route>
+          <Route path='/' element={<Login/>}></Route>
           <Route path='/home' element={<Landing/>}></Route>
           <Route path='/list' element={<Movies/>}></Route>
           <Route path='/movie' element={<Movie/>}></Route>
           <Route path='/shows' element={<Shows/>}></Route>
           <Route path='/view/:id/' name='view' element={<View/>}></Route>
           {/* <Route path='/landing'><landing/></Route> */}
-          
         </Routes>
       </Router>
     </ContextProvider>
